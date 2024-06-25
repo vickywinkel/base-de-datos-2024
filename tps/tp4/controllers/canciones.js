@@ -1,4 +1,5 @@
 import { conn } from "../db.js";
+import { app } from "../index.js";
 
 const getCanciones = async (_, res) => {
     // Completar con la consulta que devuelve todas las canciones
@@ -24,7 +25,11 @@ const getCanciones = async (_, res) => {
             },
             ...
         ]
+        ESTO ES UNA GRAN REQUEST 
     */
+    const [rows, chau] = await conn.query("SELECT * FROM canciones")
+    const data = rows; 
+    console.log(data);
 };
 
 const getCancion = async (req, res) => {
@@ -41,6 +46,9 @@ const getCancion = async (req, res) => {
             "reproducciones": "Reproducciones de la canción"
         }
     */
+    const [rows, chau] = await conn.query("SELECT * FROM canciones WHERE id = 1")
+    const data = rows; 
+    console.log(data);
 };
 
 const createCancion = async (req, res) => {
@@ -55,6 +63,9 @@ const createCancion = async (req, res) => {
         }
     */
     // (Reproducciones se inicializa en 0)
+    const [rows, chau] = await conn.query("INSERT INTO canciones (nombre, album, duracion) VALUES (?, ?, ?)", ["belusong", 10, 150])
+    const data = rows; 
+    console.log(data);
 };
 
 const updateCancion = async (req, res) => {
@@ -69,16 +80,25 @@ const updateCancion = async (req, res) => {
         }
     */
     // (Reproducciones no se puede modificar con esta consulta)
+    const [rows, chau] = await conn.query("UPDATE canciones SET nombre = 'vickysong' WHERE id = 2;")
+    const data = rows; 
+    console.log(data);
+
 };
 
 const deleteCancion = async (req, res) => {
     // Completar con la consulta que elimina una canción
     // Recordar que los parámetros de una consulta DELETE se encuentran en req.params
+    const [rows, chau] = await conn.query("DELETE FROM canciones WHERE id = nid ")
+    const data = rows; 
+    console.log(data);
+
 };
 
 const reproducirCancion = async (req, res) => {
     // Completar con la consulta que aumenta las reproducciones de una canción
     // En este caso es una consulta PUT, pero no recibe ningún parámetro en el body, solo en los params
+    
 };
 
 const canciones = {
@@ -91,3 +111,4 @@ const canciones = {
 };
 
 export default canciones;
+
