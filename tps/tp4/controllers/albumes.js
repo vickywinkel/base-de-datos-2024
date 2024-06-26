@@ -5,11 +5,16 @@ const getAlbumes = async (_, res) => {
     // Recordar que los parámetros de una consulta GET se encuentran en req.params
     // Deberían devolver los datos de la siguiente forma:
     /*
+
+
+    SELECT id, nombre, artistas.nombre AS nombre_artista
+    FROM ... JOIN ... ON... 
         [
             {
                 "id": 1,
                 "nombre": "Nombre del album",
-                "nombre_artista": "Nombre del artista"
+                "nombre_artista": "Nombre del artista" //PIDE EL NOMBRE DEL ART, NO EL ID DEL ART 
+                (SE HACE UN JOIN, PARA JUNTAR LAS 2 TABLAS)
             },
             {
                 "id": 2,
@@ -31,6 +36,8 @@ const getAlbum = async (req, res) => {
             "nombre": "Nombre del album",
             "nombre_artista": "Nombre del artista"
         }
+
+    LO MISMO Q CON LO DE ANTES SOLO QUE CON EL WHERE, Y PONER LA POSICIÓN EN 0
     */
 };
 

@@ -1,8 +1,8 @@
-import express from "express";
-export const app = express();
+import express from "express"; //IMPORTA LA LIBRERIA EXPRESS
+export const app = express(); 
 const port = 3000;
 
-import artistas from "./controllers/artistas.js";
+import artistas from "./controllers/artistas.js"; 
 import albumes from "./controllers/albumes.js";
 import canciones from "./controllers/canciones.js";
 
@@ -12,36 +12,14 @@ app.use(express.json());
 
 // Rutas
 app.get("/", (_, res) => {
-    res.send("SpoTICfy API working!");
+    res.send("SpoTICfy API working!"); //ESTO ES PARTE DE LA CONSIGNA
 });
 
-app.get("/canciones", (req, res) => {
-    res.json(canciones.getCanciones())
-})
 
-app.get("/cancion/:id", (req, res) => {
-    res.json(canciones.getCancion())
-})
-
-app.post("/canciones", (req, res) => {
-    res.json(canciones.createCancion())
-})
-
-app.put("/canciones/:id", (req, res) => {
-    res.json(canciones.updateCancion())
-})
-
-app.delete("/canciones/:id", (req, res) => {
-    const idnum = req.query.idnum
-    res.send(idnum)
-})
-
-
-
-app.get("/user", (req, res) =>{ //DE PRUEBA
+/* napp.get("/user", (req, res) =>{ //DE PRUEBA
     const nombre = req.query.nombre
     res.send(nombre)
-})
+}) */
 /* ------------------- Rutas ------------------- */
 
 // Artistas
@@ -50,6 +28,11 @@ app.get("/user", (req, res) =>{ //DE PRUEBA
 // artistas.getArtistas;
 // artistas.getArtista;
 // ...
+
+app.get("/artistas", artistas.getArtistas);  //CONECTAMOS Q CUANDO LLEGUE LA REQ LLAME A LA FUNCIÓN. 
+app.get("/artistas/:id", artistas.getArtista);
+app.post("/artistas", artistas.createArtista); 
+app.put("/artistas/:id", artistas.updateArtista); 
 
 // Albumes
 // Completar con las rutas de albumes

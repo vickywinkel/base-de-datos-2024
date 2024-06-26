@@ -17,6 +17,11 @@ const getArtistas = async (_, res) => {
             ...
         ]
     */
+    //1. BUSCAR LOS DATOS DE LA BD    
+        const [rows, fields] = await conn.query("SELECT * FROM artistas");
+
+    //2. RESPONDER CON FORMATO JSON
+         res.json(rows); //si poner que te devuelva un array es con lo de rows
 };
 
 const getArtista = async (req, res) => {
@@ -29,7 +34,17 @@ const getArtista = async (req, res) => {
             "nombre": "Nombre del artista"
         }
     */
+       //1. Obtener los datos del request
+        const id = req.params.id;
+
+        //2. Buscar los datos en la BD
+        const [rows, fields] = await conn.query("SELECT * FROM artistas WHERE id = ?", [id]);
+
+        //3. Respondemos en formato json
+        res.json(rows[0]); //la posición 0, es porque no queres un array solo el objeto (primer elemento)
 };
+
+
 
 const createArtista = async (req, res) => {
     // Completar con la consulta que crea un artista
@@ -40,6 +55,9 @@ const createArtista = async (req, res) => {
             "nombre": "Nombre del artista",
         }
     */
+    const nombre = req.body.nombre; 
+    const [rows, fields] = await conn.query("INSERT INTO artistas (artistas.nombre) VALUES (?)", [nombre]);
+    res.send("Se creo!"); 
 };
 
 const updateArtista = async (req, res) => {
@@ -51,6 +69,12 @@ const updateArtista = async (req, res) => {
             "nombre": "Nombre del artista"
         }
     */
+
+    const id = req.params.id; 
+    const nombre = req.body.nombre; 
+    const [rows, fields] = await conn.query("UPDATE artistas SET artistas.nombre ");
+    res.send("Se actualizo!"); 
+    
 };
 
 const deleteArtista = async (req, res) => {
@@ -58,13 +82,13 @@ const deleteArtista = async (req, res) => {
     // Recordar que los parámetros de una consulta DELETE se encuentran en req.params
 };
 
-const getAlbumesByArtista = async (req, res) => {
+const getAlbumesByArtista = async (req, res) => { //hacer al final 
     // Completar con la consulta que devuelve las canciones de un artista
     // Recordar que los parámetros de una consulta GET se encuentran en req.params
     // Deberían devolver los datos de la misma forma que getAlbumes
 };
 
-const getCancionesByArtista = async (req, res) => {
+const getCancionesByArtista = async (req, res) => { //hacer al finla
     // Completar con la consulta que devuelve las canciones de un artista
     // (tener en cuenta que las canciones están asociadas a un álbum, y los álbumes a un artista)
     // Recordar que los parámetros de una consulta GET se encuentran en req.params
