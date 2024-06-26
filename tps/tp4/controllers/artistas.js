@@ -69,6 +69,7 @@ const updateArtista = async (req, res) => {
             "nombre": "Nombre del artista"
         }
     */
+
     const id = req.params.id; 
     const nombre = req.body.nombre; 
     const [rows, fields] = await conn.query("UPDATE artistas SET artistas.nombre = ? WHERE id = ? ", [nombre, id]);
@@ -76,21 +77,18 @@ const updateArtista = async (req, res) => {
     
 };
 
-
-
 const deleteArtista = async (req, res) => {
     // Completar con la consulta que elimina un artista
     // Recordar que los parámetros de una consulta DELETE se encuentran en req.params
+    const id = req.params.id;
     const [rows, fields] = await conn.query("DELETE FROM artistas WHERE id = ? ", [id]);
-    res.send ("Se ha eliminado correctamente!");
+    res.send ("Se ha eliminado correctamente");
 };
 
 const getAlbumesByArtista = async (req, res) => { //hacer al final 
     // Completar con la consulta que devuelve las canciones de un artista
     // Recordar que los parámetros de una consulta GET se encuentran en req.params
     // Deberían devolver los datos de la misma forma que getAlbumes
-
-
 };
 
 const getCancionesByArtista = async (req, res) => { //hacer al finla

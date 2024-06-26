@@ -30,7 +30,7 @@ DELETE http://localhost:3000/artistas/2 HTTP/1.1
 
 ### Obtener albumes
 
-GET http://localhost:3000/albumes HTTP/1.1
+GET http://localhost:3000/albumes HTTP/1.1 
 
 ### Obtener un album por id
 

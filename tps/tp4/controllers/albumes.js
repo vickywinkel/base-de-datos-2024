@@ -24,6 +24,7 @@ const getAlbumes = async (_, res) => {
     */
         const [rows, fields] = await conn.query("SELECT (albumes.id, albumes.nombre, artistas.nombre AS nombre_artista) FROM albumes JOIN artistas ON artistas.id = album.artista"); //check
         res.json(rows);
+        // PREGUNTAR LO DE LA QUERY
 
 };
 
@@ -59,7 +60,7 @@ const createAlbum = async (req, res) => {
 
         const nombre = req.body.nombre; //chequear
         const idartista = req.body.idartista;
-        const [rows, fields] = await conn.query("INSERT INTO albumes (albumes.nombre, albumes.idartista) VALUES (? , ?)", [nombre, idartista]);
+        const [rows, fields] = await conn.query("INSERT INTO albumes (albumes.nombre, albumes.artista) VALUES (? , ?)", [nombre, idartista]);
         res.send("Se creo! :)"); 
 };
 
