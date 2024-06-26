@@ -27,7 +27,8 @@ const getCanciones = async (_, res) => {
         ]
         ESTO ES UNA GRAN REQUEST 
     */
-   
+    const [rows, fields] = await conn.query("SELECT * FROM canciones"); //chequar
+    res.json(rows);
 };
 
 const getCancion = async (req, res) => {
@@ -45,6 +46,9 @@ const getCancion = async (req, res) => {
         }
     */
     
+    const id = req.params.id; //chequar
+    const [rows, fields] = await conn.query("SELECT * FROM canciones WHERE id = ?", [id]);
+    res.json(rows[0]);
 };
 
 const createCancion = async (req, res) => {
@@ -59,7 +63,11 @@ const createCancion = async (req, res) => {
         }
     */
     // (Reproducciones se inicializa en 0)
-   
+    const nombre = req.body.nombre; //chequear si es ? en total o uno x coso
+    const alb = req.body.alb;
+    const dur = req.body.dur;
+    const [rows, fields] = await conn.query("INSERT INTO albumes (canciones.nombre, canciones.alb, canciones.dur) VALUES (?)", [nombre, alb, dur]);
+    res.send("Se creo!! :)"); 
 };
 
 const updateCancion = async (req, res) => {
@@ -81,7 +89,9 @@ const updateCancion = async (req, res) => {
 const deleteCancion = async (req, res) => {
     // Completar con la consulta que elimina una canción
     // Recordar que los parámetros de una consulta DELETE se encuentran en req.params
- 
+
+    const [rows, fields] = await conn.query("DELETE FROM canciones WHERE id = ? ", [id]);
+    res.send ("Se ha eliminado correctamente!! :)");
 
 };
 
