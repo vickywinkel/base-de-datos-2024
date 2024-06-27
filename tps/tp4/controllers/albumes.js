@@ -43,7 +43,7 @@ const getAlbum = async (req, res) => {
     */
 
     const id = req.params.id; //check
-    const [rows, fields] = await conn.query("SELECT (albumes.id, albumes.nombre, artistas.nombre AS nombre_artista) FROM albumes JOIN artistas ON artistas.id = album.artista WHERE id = ?", [id]);
+    const [rows, fields] = await conn.query("SELECT albumes.id, albumes.nombre, artistas.nombre AS nombre_artista FROM albumes JOIN artistas ON artistas.id = albumes.artista WHERE albumes.id = ?", [id]);
     res.json(rows[0]); //la posición 0, es porque no queres un array solo el objeto (primer elemento)
 };
 
