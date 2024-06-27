@@ -22,7 +22,8 @@ const getAlbumes = async (_, res) => {
             ...
         ]
     */
-        const [rows, fields] = await conn.query("SELECT (albumes.id, albumes.nombre, artistas.nombre AS nombre_artista) FROM albumes JOIN artistas ON artistas.id = album.artista"); //check
+        
+        const [rows, fields] = await conn.query("SELECT albumes.id, albumes.nombre, artistas.nombre AS nombre_artista FROM albumes JOIN artistas ON artistas.id = albumes.artista");
         res.json(rows);
         // PREGUNTAR LO DE LA QUERY
 
@@ -42,9 +43,9 @@ const getAlbum = async (req, res) => {
     LO MISMO Q CON LO DE ANTES SOLO QUE CON EL WHERE, Y PONER LA POSICIÓN EN 0
     */
 
-    const id = req.params.id; //check
-    const [rows, fields] = await conn.query("SELECT albumes.id, albumes.nombre, artistas.nombre AS nombre_artista FROM albumes JOIN artistas ON artistas.id = albumes.artista WHERE albumes.id = ?", [id]);
-    res.json(rows[0]); //la posición 0, es porque no queres un array solo el objeto (primer elemento)
+        const id = req.params.id; //check
+        const [rows, fields] = await conn.query("SELECT albumes.id, albumes.nombre, artistas.nombre AS nombre_artista FROM albumes JOIN artistas ON artistas.id = albumes.artista WHERE albumes.id = ?", [id]);
+        res.json(rows[0]); //la posición 0, es porque no queres un array solo el objeto (primer elemento)
 };
 
 const createAlbum = async (req, res) => {
@@ -57,7 +58,6 @@ const createAlbum = async (req, res) => {
             "artista": "Id del artista"
         }
     */
-
         const nombre = req.body.nombre; //chequear
         const idartista = req.body.idartista;
         const [rows, fields] = await conn.query("INSERT INTO albumes (albumes.nombre, albumes.artista) VALUES (? , ?)", [nombre, idartista]);
