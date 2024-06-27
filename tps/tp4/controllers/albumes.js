@@ -48,7 +48,7 @@ const getAlbum = async (req, res) => {
         res.json(rows[0]); //la posición 0, es porque no queres un array solo el objeto (primer elemento)
 };
 
-const createAlbum = async (req, res) => {
+const createAlbum = async (req, res) => { //si
     // Completar con la consulta que crea un album
     // Recordar que los parámetros de una consulta POST se encuentran en req.body
     // Deberían recbir los datos de la siguiente forma:
@@ -59,12 +59,12 @@ const createAlbum = async (req, res) => {
         }
     */
         const nombre = req.body.nombre; //chequear
-        const idartista = req.body.idartista;
+        const idartista = req.body.artista;
         const [rows, fields] = await conn.query("INSERT INTO albumes (albumes.nombre, albumes.artista) VALUES (? , ?)", [nombre, idartista]);
         res.send("Se creo! :)"); 
 };
 
-const updateAlbum = async (req, res) => {
+const updateAlbum = async (req, res) => { //si
     // Completar con la consulta que actualiza un album
     // Recordar que en este caso tienen parámetros en req.params (el id) y en req.body (los demás datos)
     // Deberían recbir los datos de la siguiente forma:
@@ -76,15 +76,15 @@ const updateAlbum = async (req, res) => {
     */
         const id = req.params.id;  //RECONTRA CHEQUEAR
         const nombre = req.body.nombre; 
-        const idartista = req.body.idartista;
-        const [rows, fields] = await conn.query("UPDATE albumes SET albumes.nombre = ?, albumes.idartista = ? WHERE id = ? ", [nombre, id, idartista]);
-        res.send("Se actualizo! :)"); 
+        const idartista = req.body.artista;
+        const [rows, fields] = await conn.query("UPDATE albumes SET albumes.nombre = ?, albumes.artista = ? WHERE id = ? ", [nombre, idartista, id]);
+        res.send("Se actualizo! :)");
 };
 
-const deleteAlbum = async (req, res) => {
+const deleteAlbum = async (req, res) => { //si
     // Completar con la consulta que elimina un album
     // Recordar que los parámetros de una consulta DELETE se encuentran en req.params
-
+    const id = req.params.id;
     const [rows, fields] = await conn.query("DELETE FROM albumes WHERE id = ? ", [id]);
     res.send ("Se ha eliminado correctamente! :)");
 };
@@ -93,6 +93,10 @@ const getCancionesByAlbum = async (req, res) => {
     // Completar con la consulta que devuelve las canciones de un album
     // Recordar que los parámetros de una consulta GET se encuentran en req.params
     // Deberían devolver los datos de la misma forma que getCanciones
+
+    const id = req.params.id;
+    const [rows, fields] = await conn.query("SELECT canciones.nombre, canciones.album FROM canciones JOIN albumes.id = ? ON canciones.album = albumes.id" [id])
+    res.send('Hemos obtenido la canción desde el album!');
 };
 
 const albumes = {

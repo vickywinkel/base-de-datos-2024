@@ -46,8 +46,9 @@ app.delete("/artistas/:id", artistas.deleteArtista);
 app.get("/albumes", albumes.getAlbumes); //chequear
 app.get("/albumes/:id", albumes.getAlbum); //chequear
 app.post("/albumes", albumes.createAlbum); //chequar
-app.put("/albumes/:id", albumes.updateAlbum); //RECONTRA CHEQUEO
-app.delete("/albumes/:id", albumes.deleteAlbum); 
+app.put("/albumes/:id", albumes.updateAlbum);
+app.delete("/albumes/:id", albumes.deleteAlbum);
+app.get("/albumes/:id/canciones", albumes.getCancionesByAlbum);
 
 
 // Canciones
@@ -59,9 +60,9 @@ app.delete("/albumes/:id", albumes.deleteAlbum);
 
 app.get("/canciones", canciones.getCanciones);  //CONECTAMOS Q CUANDO LLEGUE LA REQ LLAME A LA FUNCIÓN. 
 app.get("/canciones/:id", canciones.getCancion);
-app.post("/artistas", canciones.createCancion); 
-app.put("/artistas/:id", canciones.updateCancion);
-app.delete("/artistas/:id", canciones.deleteCancion); 
+app.post("/canciones", canciones.createCancion); 
+app.put("/canciones/:id", canciones.updateCancion);
+app.delete("/canciones/:id", canciones.deleteCancion); 
 
 
 
