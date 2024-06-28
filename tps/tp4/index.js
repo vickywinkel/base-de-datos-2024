@@ -34,6 +34,8 @@ app.get("/artistas/:id", artistas.getArtista);
 app.post("/artistas", artistas.createArtista); 
 app.put("/artistas/:id", artistas.updateArtista);
 app.delete("/artistas/:id", artistas.deleteArtista); 
+app.get("/artistas/:id/albumes", artistas.getAlbumesByArtista); 
+app.get("/artistas/:id/canciones", artistas.getCancionesByArtista); 
 
 
 // Albumes
@@ -63,6 +65,7 @@ app.get("/canciones/:id", canciones.getCancion);
 app.post("/canciones", canciones.createCancion); 
 app.put("/canciones/:id", canciones.updateCancion);
 app.delete("/canciones/:id", canciones.deleteCancion); 
+app.put("/canciones/:id/reproducir", canciones.reproducirCancion);
 
 
 

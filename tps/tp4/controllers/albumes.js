@@ -26,7 +26,6 @@ const getAlbumes = async (_, res) => {
         const [rows, fields] = await conn.query("SELECT albumes.id, albumes.nombre, artistas.nombre AS nombre_artista FROM albumes JOIN artistas ON artistas.id = albumes.artista");
         res.json(rows);
         // PREGUNTAR LO DE LA QUERY
-
 };
 
 const getAlbum = async (req, res) => {
@@ -95,8 +94,8 @@ const getCancionesByAlbum = async (req, res) => {
     // Deberían devolver los datos de la misma forma que getCanciones
 
     const id = req.params.id;
-    const [rows, fields] = await conn.query("SELECT canciones.nombre, canciones.album FROM canciones JOIN albumes.id = ? ON canciones.album = albumes.id" [id])
-    res.send('Hemos obtenido la canción desde el album!');
+    const [rows, fields] = await conn.query("SELECT canciones.id, canciones.nombre, artistas.nombre AS nombre_artista, albumes.nombre AS nombre_album, canciones.duracion, canciones.reproducciones FROM albumes JOIN artistas ON artistas.id = albumes.artista JOIN canciones ON canciones.album = albumes.id WHERE albumes.id = ?", [id])
+    res.json(rows); 
 };
 
 const albumes = {
