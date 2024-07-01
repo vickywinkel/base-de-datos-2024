@@ -96,7 +96,7 @@ DELETE http://localhost:3000/canciones/11 HTTP/1.1
 
 ### Reproducir una cancion
 
-PUT http://localhost:3000/canciones/10/reproducir HTTP/1.1
+PUT http://localhost:3000/canciones/1/reproducir HTTP/1.1
 
 ### Obtener canciones de un album
 
